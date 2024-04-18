@@ -1,0 +1,134 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+#########
+
+- intent: select_genre
+  example: 
+    - tell me some [Action](genre) series 
+    - [Western] (genre) tv series 
+    - i wanna know a [Comedy] (genre) tv series 
+    - could you tell me a [Fantasy] (genre) series?
+    - can you tell me a [Fantasy] (genre) tv series? 
+    - do you know some [Action] (genre) series?
+
+- intent: select_kids_tv_series
+  example:
+    - tell me some tv series for kids
+    - kids tv series 
+    - i wanna know a cartoon series 
+    - could you tell me a cartoon series?
+    - can you tell me a tv series for kids? 
+    - do you know some cartoon series?
+
+- intent: top_rating
+  example:
+    - can you tell me the top rated series?
+    - i want to watch a tv series with good ratings
+    - which are the best tv series that you know?
+    - top rated series
+    - must-see tv series
+    - suggest me a tv series with a high rating
+    - tell me your favorites series
+
+- intent: tv_series_info
+  example:
+    - can i have some information about [Breaking bad]] (movie)?
+    - i want informations about [Games of thrones] (movie)
+    - tell me something about the film [Money heist] (movie)
+    - info about [Stranger things] (movie)
+    - have you got any info about the movie [Lucifer] (movie)?
+
+
+#- intent: short_tv_series
+#  example:
+#    -

@@ -1,0 +1,35 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+
+- rule: top_rating
+  steps:
+    - intent: top_rating
+    - action: recommend_top_rating
+
+- rule: recommend_genre
+  steps:
+    - intent: select_genre
+    - action: recommend_genre
+
+- rule: recommend_kids_series
+  steps:
+    - intent: select_kids_tv_series
+    - action: recommend_kids_tvseries
+
+- rule: info_series
+  steps:
+    - intent: tv_series_info
+    - action: info_serie_tv
+

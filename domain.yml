@@ -1,0 +1,74 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - select_genre
+  - select_kids_tv_series
+  - top_rating
+  - tv_series_info
+  #- request_raccomandation
+  #- top_rating
+  #- top_rating_genre
+
+
+entities:
+  - genre
+  - tv series #oppure mettere nome
+
+slots:
+  - genre : 
+      type : text
+  - rating :
+      type : float
+  - series_name:
+      type : text
+  - year: #anno di uscita -> first_air_date
+      type : text
+  - episode_count:
+      type : float
+  - language:
+      type : text
+
+
+
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+
+actions:
+  - action_hello_word
+  - recommend_top_rating #voti
+  - recommend_genre
+  - recommend_kids_tvseries
+  - info_serie_tv #dal nome cerco sul db e ritorno le informazioni
+  #- recommend_lenght #cerca le serie tv in base alla numero di episodi
+  #- recommend_popural #per popolarità
+  # se una serie tv è popolare
+
+#session_config:
+#  session_expiration_time: 60
+#  carry_over_slots_to_new_session: true
