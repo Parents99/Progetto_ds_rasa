@@ -79,7 +79,7 @@ class ActionRecommendGenre(Action):
         print(data)
 
         if data:
-            names : list = [row[0] for row in data] #### da cambiare
+            names : list = [row[0] for row in data] 
             dispatcher.utter_message("here some {} tv series:\n- {}".format(genre, "\n- ".join(names))) #forse basta
             #dispatcher.utter_message("funziona")
         else:
