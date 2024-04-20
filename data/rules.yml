@@ -12,6 +12,11 @@ rules:
   - intent: bot_challenge
   - action: utter_iamabot
 
+- rule: saluta
+  steps:
+    - intent: prova
+    - action: action_hello_word
+
 
 - rule: top_rating
   steps:

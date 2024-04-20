@@ -90,19 +90,19 @@ nlu:
     - am I talking to a bot?
     - am I talking to a human?
 
-#########
+
 
 - intent: select_genre
-  example: 
+  examples: |
     - tell me some [Action](genre) series 
-    - [Western] (genre) tv series 
-    - i wanna know a [Comedy] (genre) tv series 
-    - could you tell me a [Fantasy] (genre) series?
-    - can you tell me a [Fantasy] (genre) tv series? 
-    - do you know some [Action] (genre) series?
+    - some [Western](genre) tv series 
+    - i wanna know a [Comedy](genre) tv series 
+    - could you tell me a [Fantasy](genre) series?
+    - can you tell me a [Fantasy](genre) tv series? 
+    - do you know some [Action](genre) series?
 
 - intent: select_kids_tv_series
-  example:
+  examples: |
     - tell me some tv series for kids
     - kids tv series 
     - i wanna know a cartoon series 
@@ -111,7 +111,7 @@ nlu:
     - do you know some cartoon series?
 
 - intent: top_rating
-  example:
+  examples: |
     - can you tell me the top rated series?
     - i want to watch a tv series with good ratings
     - which are the best tv series that you know?
@@ -121,14 +121,20 @@ nlu:
     - tell me your favorites series
 
 - intent: tv_series_info
-  example:
-    - can i have some information about [Breaking bad]] (movie)?
-    - i want informations about [Games of thrones] (movie)
-    - tell me something about the film [Money heist] (movie)
-    - info about [Stranger things] (movie)
-    - have you got any info about the movie [Lucifer] (movie)?
+  examples: |
+    - can i have some information about [Breaking bad] (tv_series)?
+    - i want informations about [Games of thrones] (tv_series)
+    - tell me something about the film [Money heist] (tv_series)
+    - info about [Stranger things] (tv_series)
+    - have you got any info about the movie [Lucifer] (tv_series)?
 
 
+- intent: prova
+  examples: |
+    - "prova"
+    - "test"
+    - "test1"
+    - "prova1"
 #- intent: short_tv_series
 #  example:
 #    -

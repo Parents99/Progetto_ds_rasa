@@ -12,6 +12,7 @@ intents:
   - select_kids_tv_series
   - top_rating
   - tv_series_info
+  - prova
   #- request_raccomandation
   #- top_rating
   #- top_rating_genre
@@ -22,18 +23,22 @@ entities:
   - tv series #oppure mettere nome
 
 slots:
-  - genre : 
-      type : text
-  - rating :
-      type : float
-  - series_name:
-      type : text
-  - year: #anno di uscita -> first_air_date
-      type : text
-  - episode_count:
-      type : float
-  - language:
-      type : text
+  genre : 
+    type : text
+    mappings:
+      - action: recommend_genre
+        type: from_text
+        intent: select_genre
+#  - rating :
+#      type : float
+#  - series_name:
+#      type : text
+#  - year: #anno di uscita -> first_air_date
+#      type : text
+#  - episode_count:
+#      type : float
+#  - language:
+#      type : text
 
 
 
@@ -61,9 +66,9 @@ responses:
 
 actions:
   - action_hello_word
-  - recommend_top_rating #voti
   - recommend_genre
   - recommend_kids_tvseries
+  - recommend_top_rating #voti
   - info_serie_tv #dal nome cerco sul db e ritorno le informazioni
   #- recommend_lenght #cerca le serie tv in base alla numero di episodi
   #- recommend_popural #per popolarità

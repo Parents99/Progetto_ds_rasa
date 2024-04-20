@@ -15,6 +15,7 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
+
 from dotenv import load_dotenv
 
 #
@@ -28,8 +29,11 @@ PASSWORD = os.environ.get("password")
 
 #connection = pg.connect(database = DB_NAME, user = USER, password = PASSWORD)
 
-connection = pg.connect("dbname=progetto_rasa user=postgres password=prova")
+
+connection = pg.connect("dbname=progetto_rasa user=postgres password=prova host=localhost")
 cursor = connection.cursor()
+print("ciao")
+print(connection.isexecuting())
 
 
 
@@ -55,19 +59,29 @@ class ActionRecommendGenre(Action):
         return "recommend_genre"
     
     def run(self, dispatcher : CollectingDispatcher, tracker : Tracker, domain: Dict[Text, Any]) -> List[Dict[Text,Any]]:
-        genre : str = tracker.get_slot("genre")
+        #genre : str = tracker.get_slot("genre")
+        genre = next(tracker.get_latest_entity_values("genre"),None)
+
+        genre = str(genre)
+
+        print(genre)
 
         if not genre:
-            pass #messagio di genere non capito
+            dispatcher.utter_message("I'm sorry, I do not undestand the genre.")
             return []
 
+        #print(connection.isexecuting())
         query = f"SELECT name FROM serie_tv WHERE genres_1 ILIKE '{genre}'  OR genres_2 ILIKE '{genre}' ORDER BY vote_count DESC LIMIT 20"
+        print(query)
         cursor.execute(query)
         data = cursor.fetchall()
 
+        print(data)
+
         if data:
-            names : list = [row[2] for row in data] #### da cambiare
+            names : list = [row[0] for row in data] #### da cambiare
             dispatcher.utter_message("here some {} tv series:\n- {}".format(genre, "\n- ".join(names))) #forse basta
+            #dispatcher.utter_message("funziona")
         else:
             dispatcher.utter_message("I'm sorry, I couldn't find TV series with the specified genre.")
 
@@ -162,4 +176,4 @@ class ActionRecommendbyYears(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
-         
+        pass 
