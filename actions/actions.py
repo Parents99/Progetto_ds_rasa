@@ -32,9 +32,6 @@ PASSWORD = os.environ.get("password")
 
 connection = pg.connect("dbname=progetto_rasa user=postgres password=prova host=localhost")
 cursor = connection.cursor()
-print("ciao")
-print(connection.isexecuting())
-
 
 
 class ActionHelloWorld(Action):
@@ -64,10 +61,8 @@ class ActionRecommendGenre(Action):
 
         genre = str(genre)
 
-        print(genre)
-
         if not genre:
-            dispatcher.utter_message("I'm sorry, I do not undestand the genre.")
+            dispatcher.utter_message("I'm sorry, I do not understand the genre.")
             return []
 
         #print(connection.isexecuting())
@@ -76,7 +71,7 @@ class ActionRecommendGenre(Action):
         cursor.execute(query)
         data = cursor.fetchall()
 
-        print(data)
+        #print(data)
 
         if data:
             names : list = [row[0] for row in data] 
@@ -102,7 +97,9 @@ class ActionRecommendTopRating(Action):
         data = cursor.fetchall()
 
         if(data):
-            pass
+            names : list = [row[0] for row in data] 
+            fstr = "Here are the most rated TV series:\n- {}".format("\n- ".join(names))
+            dispatcher.utter_message(fstr)
         else:
             dispatcher.utter_message("I'm sorry, there is a problem with the database")
         
@@ -120,28 +117,31 @@ class ActionInfoSeries(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         # Estrai il valore dell'entità 'serie_tv' dal tracker
-        serie_tv : str = next(tracker.get_latest_entity_values("serie_tv"), None)
+        serie_tv : str = next(tracker.get_latest_entity_values("tv_series"), None)
+
+        print(serie_tv)
 
         if not serie_tv:
             dispatcher.utter_message("Non ho capito su quale serie TV stai chiedendo informazioni.")
             return []
 
-        query = f"SELECT DINSTICT name,overview,in_production,original_language,number_of_seasons,number_of_episodes,vote_count FROM serie_tv WHERE name ILIKE '{serie_tv}'"
+        query = f"SELECT DISTINCT name,overview,in_production,original_language,number_of_seasons,number_of_episodes,vote_count FROM serie_tv WHERE name ILIKE '{serie_tv}'"
         cursor.execute(query)
         data = cursor.fetchall()
         
-        rating = data[2] #il 2 a caso, cambiare
-        genre = data[5] # a caso
-
 
         if data:
-            dispatcher.utter_message(f"Hai chiesto informazioni su {serie_tv}.")
+            #dispatcher.utter_message(f"Hai chiesto informazioni su {serie_tv}.")
+            #name = data[0][0]
+            #fstr = f"name : {data[0][0]}\noverview : {data[0][1]}\nin production : {data[0][2]}\noriginal language : {data[0][3]}\n \
+            #number of season : {data[0][4]}"
+            parsed_data = format_info(data)
             ##### messaggio con dati query
-            dispatcher.utter_message(f"data.. {data}") ##### da cambiare
+            dispatcher.utter_message(f"here is some information about : {serie_tv}\n{parsed_data}") ##### da cambiare
         else:
             dispatcher.utter_message("Non ho trovato la serie TV che stai chiedendo informazioni.")
 
-        return [SlotSet("rating", rating)]
+        return []#[SlotSet("rating", rating)]
 
 
 
@@ -161,7 +161,9 @@ class ActionKidsSeries(Action):
         data = cursor.fetchall()
 
         if data:
-            pass
+            names : list = [row[0] for row in data] 
+            fstr = "Here are some TV series for kids:\n- {}".format("\n- ".join(names))
+            dispatcher.utter_attachment(fstr)
         else:
             dispatcher.utter_message("I'm sorry, there is a problem with the database")
 
@@ -177,3 +179,33 @@ class ActionRecommendbyYears(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
         pass 
+
+
+
+def format_info(data : list) -> str:
+
+    # Lista di tuple di esempio (puoi sostituirla con i tuoi dati)
+    #data = [("Nome serie", "Panoramica della serie", "In produzione", "Lingua originale", 3, 24, 1000)]
+
+    fields = ["name", "overview", "in production", "original language", "number of seasons", "number of episodes", "vote count"]
+
+    fstr = ""
+
+    # Funzione per aggiungere un campo alla stringa se esiste nella tupla dei dati
+    def add_field(field_name, field_value):
+
+        if field_value is not None:
+            if isinstance(field_value, float):
+                field_value = int(field_value)
+            return f"\n{field_name.replace('_', ' ')}: {field_value}"
+        else:
+            return ""
+
+    # Itera attraverso i campi e aggiungi quelli presenti nella tupla dei dati
+    for field in fields:
+        index = fields.index(field)
+        if index < len(data[0]):
+            fstr += add_field(field, data[0][index])
+
+    return fstr
+

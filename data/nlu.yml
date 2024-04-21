@@ -122,11 +122,11 @@ nlu:
 
 - intent: tv_series_info
   examples: |
-    - can i have some information about [Breaking bad] (tv_series)?
-    - i want informations about [Games of thrones] (tv_series)
-    - tell me something about the film [Money heist] (tv_series)
-    - info about [Stranger things] (tv_series)
-    - have you got any info about the movie [Lucifer] (tv_series)?
+    - can i have some information about [Breaking bad](tv_series)?
+    - i want informations about [Games of thrones](tv_series)
+    - tell me something about the film [Money heist](tv_series)
+    - info about [Stranger things](tv_series)
+    - have you got any info about the movie [Lucifer](tv_series)?
 
 
 - intent: prova

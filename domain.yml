@@ -20,7 +20,7 @@ intents:
 
 entities:
   - genre
-  - tv series #oppure mettere nome
+  - tv_series #oppure mettere nome
 
 slots:
   genre : 
@@ -29,6 +29,12 @@ slots:
       - action: recommend_genre
         type: from_text
         intent: select_genre
+  series_name:
+    type : text
+    mappings:
+      - action: info_serie_tv
+        type: from_text
+        intent: tv_series_info
 #  - rating :
 #      type : float
 #  - series_name:
