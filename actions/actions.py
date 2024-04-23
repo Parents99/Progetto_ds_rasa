@@ -101,7 +101,7 @@ class ActionRecommendTopRating(Action):
             fstr = "Here are the most rated TV series:\n- {}".format("\n- ".join(names))
             dispatcher.utter_message(fstr)
         else:
-            dispatcher.utter_message("I'm sorry, there is a problem with the database")
+            dispatcher.utter_message("I'm sorry, I couldn't retrieve the information you requested. Please try again")
         
         return []
     
@@ -163,31 +163,62 @@ class ActionKidsSeries(Action):
         if data:
             names : list = [row[0] for row in data] 
             fstr = "Here are some TV series for kids:\n- {}".format("\n- ".join(names))
-            dispatcher.utter_attachment(fstr)
+            dispatcher.utter_message(fstr)
         else:
             dispatcher.utter_message("I'm sorry, there is a problem with the database")
 
         return []
     
 
-class ActionRecommendbyYears(Action):
+class ActionRecommendShortSeries(Action):
     def name(self) -> Text:
-        return "recommend_by_years"
+        return "recommend_short_series"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
-        pass 
+        query = "select name from serie_tv where number_of_episodes < 10 order by vote_count desc limit 20"
+        cursor.execute(query)
+        data = cursor.fetchall()
+
+        if data:
+            names : list = [row[0] for row in data] 
+            fstr = "Here are some  miniseries:\n- {}".format("\n- ".join(names))
+            dispatcher.utter_message(fstr)
+        else:
+            dispatcher.utter_message("I'm sorry, there is a problem with the database")
+
+        return []
 
 
+class ActionGetHelp(Action):
+    def name(self) -> Text:
+        return "help_action"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        message = """   Welcome to our TV assistance service! Here's what I can do for you:
+
+            - TV series recommendations, i can recommend TV series based on:
+	            - rating
+	            - genre
+	            - length
+	            - tv series for kids
+
+            - TV series information: If you have a TV series in mind, provide me with its name and I'll tell you everything I know about it.
+        """
+        dispatcher.utter_message(message)
+        return []
 
 def format_info(data : list) -> str:
 
     # Lista di tuple di esempio (puoi sostituirla con i tuoi dati)
     #data = [("Nome serie", "Panoramica della serie", "In produzione", "Lingua originale", 3, 24, 1000)]
 
-    fields = ["name", "overview", "in production", "original language", "number of seasons", "number of episodes", "vote count"]
+    fields = ["Name", "Overview", "In production", "Original language", "Number of seasons", "Number of episodes", "Vote count"]
 
     fstr = ""
 

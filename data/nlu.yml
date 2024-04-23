@@ -124,10 +124,27 @@ nlu:
   examples: |
     - can i have some information about [Breaking bad](tv_series)?
     - i want informations about [Games of thrones](tv_series)
-    - tell me something about the film [Money heist](tv_series)
+    - tell me something about the series [Money heist](tv_series)
     - info about [Stranger things](tv_series)
-    - have you got any info about the movie [Lucifer](tv_series)?
+    - have you got any info about the series [Lucifer](tv_series)?
 
+
+- intent: short_series
+  examples: |
+    - tell me some short series
+    - suggest me some short tv series
+    - there is some TV series with few episodes?
+    - can you tell me some mini-series?
+    - do you know some miniseries?
+
+
+- intent: help
+  examples: |
+    - could you help me?
+    - what can i ask you?
+    - what you can do?
+    - help me
+    - help
 
 - intent: prova
   examples: |

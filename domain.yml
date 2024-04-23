@@ -13,6 +13,8 @@ intents:
   - top_rating
   - tv_series_info
   - prova
+  - short_series
+  - help
   #- request_raccomandation
   #- top_rating
   #- top_rating_genre
@@ -21,6 +23,7 @@ intents:
 entities:
   - genre
   - tv_series #oppure mettere nome
+  #- episodes
 
 slots:
   genre : 
@@ -35,6 +38,12 @@ slots:
       - action: info_serie_tv
         type: from_text
         intent: tv_series_info
+  episode_count:
+    type: text
+    mappings:
+      - action: recommend_short_series
+        type: from_text
+        intent: short_series
 #  - rating :
 #      type : float
 #  - series_name:
@@ -71,11 +80,12 @@ responses:
 
 
 actions:
-  - action_hello_word
   - recommend_genre
   - recommend_kids_tvseries
-  - recommend_top_rating #voti
-  - info_serie_tv #dal nome cerco sul db e ritorno le informazioni
+  - recommend_top_rating 
+  - info_serie_tv 
+  - recommend_short_series
+  - help_action
   #- recommend_lenght #cerca le serie tv in base alla numero di episodi
   #- recommend_popural #per popolarità
   # se una serie tv è popolare

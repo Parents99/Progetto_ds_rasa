@@ -38,3 +38,13 @@ rules:
     - intent: tv_series_info
     - action: info_serie_tv
 
+- rule: mini_series
+  steps:
+    - intent: short_series
+    - action: recommend_short_series
+
+- rule: get_help
+  steps:
+    - intent: help
+    - action: help_action
+
