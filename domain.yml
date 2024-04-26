@@ -2,6 +2,7 @@ version: "3.1"
 
 intents:
   - greet
+  - start
   - goodbye
   - affirm
   - deny
@@ -62,6 +63,9 @@ responses:
   utter_greet:
   - text: "Hey! How are you?"
 
+  utter_start:
+  - text: "Started"
+
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
     image: "https://i.imgur.com/nGF1K8f.jpg"
@@ -90,6 +94,6 @@ actions:
   #- recommend_popural #per popolarità
   # se una serie tv è popolare
 
-#session_config:
-#  session_expiration_time: 60
-#  carry_over_slots_to_new_session: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

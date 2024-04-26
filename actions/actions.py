@@ -34,18 +34,6 @@ connection = pg.connect("dbname=progetto_rasa user=postgres password=prova host=
 cursor = connection.cursor()
 
 
-class ActionHelloWorld(Action):
-
-    def name(self) -> Text:
-        return "action_hello_world"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        dispatcher.utter_message(text="Hello World!")
-
-        return []
 
 
 #"Ciao {}:\n- {}".format(genre, "\n- ".join(l))
@@ -216,7 +204,6 @@ class ActionGetHelp(Action):
 def format_info(data : list) -> str:
 
     # Lista di tuple di esempio (puoi sostituirla con i tuoi dati)
-    #data = [("Nome serie", "Panoramica della serie", "In produzione", "Lingua originale", 3, 24, 1000)]
 
     fields = ["Name", "Overview", "In production", "Original language", "Number of seasons", "Number of episodes", "Vote count"]
 

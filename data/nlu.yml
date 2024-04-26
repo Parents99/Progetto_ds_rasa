@@ -17,6 +17,13 @@ nlu:
     - goodevening
     - good afternoon
 
+- intent: start
+  examples: |
+    - start
+    - open
+    - begin
+    - init
+
 - intent: goodbye
   examples: |
     - cu
